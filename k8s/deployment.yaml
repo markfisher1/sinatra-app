@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sinatra-app
+  labels:
+    app: sinatra
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sinatra
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: sinatra
+    spec:
+      containers:
+        - name: sinatra-container
+          image: my-sinatra-app:latest
+          ports:
+            - containerPort: 4567
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 4567
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 4567
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"

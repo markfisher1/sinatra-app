@@ -1,0 +1,75 @@
+terraform/.terraform.lock.hcl
+terraform/.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+terraform/terraform.tfvars
+terraform/terraform.tfvars.json
+# === Ruby & Sinatra ===
+*.gem
+*.rbc
+.bundle
+config.yml
+vendor/
+tmp/
+log/
+db/*.sqlite3
+*.sqlite3
+.ruby-version
+.ruby-gemset
+coverage/
+.byebug_history
+.env
+.env.*
+
+# === Bundler ===
+/Gemfile.lock
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# === Docker ===
+*.pid
+*.log
+docker-compose.override.yml
+
+# === Node/npm (if used with frontend assets) ===
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# === IDEs & Editors ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.tmproj
+*.komodoproject
+
+
+# === Other logs, artifacts, and temp files ===
+*.log
+*.out
+*.err
+*.bak
+*.tmp
+*.old
+*.orig
+
+# === Secret keys or API tokens ===
+secrets.yml
+config/initializers/secret_token.rb
+config/master.key
+config/credentials.yml.enc
+
+
+
