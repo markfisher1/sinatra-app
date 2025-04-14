@@ -641,12 +641,29 @@ Then, run your Terraform commands:
 
    - terraform init
 
+![TERRAFORM INIT](<images/tf init1.PNG>)
+
 
    - terraform plan
+
+![TERRAFORM PLAN](<images/tf plan1.PNG>)
+
+
+
+
+![TERRAFORM PLAN](<images/tf plan2.PNG>)
 
 
 
    - terraform apply
+
+   ![alt text](<images/tf apply.PNG>)
+
+
+   ![alt text](<images/tf apply1.PNG>)
+
+
+   ![alt text](<images/tf plan2.PNG>)
 
 After reviewing the Terraform documentation and community best practices, the command to destroy your deployed resources is:
 
@@ -657,7 +674,15 @@ After reviewing the Terraform documentation and community best practices, the co
 
 kubectl apply -f ../k8s/deployment.yaml
 
+
+![alt text](<images/kubectl apply.PNG>)
+
+
 kubectl apply -f ../k8s/service.yaml
+
+
+![alt text](<images/kubectl apply 1.PNG>)
+
 
 kubectl apply -f ../k8s/ingress.yaml  # if using ingress
 
@@ -725,6 +750,12 @@ Run the following command to build the image and tag it as version 1.0.0:
 
 
    - docker build -t cats:1.0.0 .
+
+![alt text](<images/Docker image.PNG>)
+
+
+
+
 
 3. Prepare Kubernetes Artifacts
 
@@ -906,6 +937,8 @@ Clone the repository:
 
 Check out the tag for version 1.0.0.
 
+![alt text](<images/version 1.0.PNG>)
+
 Containerize the Cats App:
 
 Ensure there is a Dockerfile in the repository (or add one similar to the one in Step 2).
@@ -968,8 +1001,6 @@ Configure your Ruby logger to output in JSON format. This can be integrated with
 Additional Observability:
 
 Consider adding instrumentation libraries (for distributed tracing such as Jaeger) if needed.
-
-Step 7: Document Every Step
 
 Repository Structure:
 
@@ -1092,3 +1123,14 @@ Set up Prometheus, Grafana, and central logging.
 Documentation & Runbooks:
 
 Provide thorough written documentation that includes repository structure, deployment procedures, rollback instructions, and architecture diagrams.
+
+
+### Expected output:
+
+
+
+![AKS CLUSTER](images/AKS1.PNG)
+
+
+![AKS CLUSTER](images/AKS2.PNG)
+

@@ -20,6 +20,7 @@ coverage/
 .byebug_history
 .env
 .env.*
+app/Gemfile.lock
 
 # === Bundler ===
 /Gemfile.lock
