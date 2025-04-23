@@ -1,6 +1,6 @@
 provider "azurerm" {
   features {}
-  subscription_id = "057515ec-5642-4f2b-8417-1982d7271ad0"  # Replace with your Azure Subscription ID
+  subscription_id = "0000000-00000-00000-0000-00000000"  # Replace with your Azure Subscription ID
 }
 
 resource "azurerm_resource_group" "rg" {
