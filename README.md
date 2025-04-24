@@ -1125,6 +1125,111 @@ Documentation & Runbooks:
 Provide thorough written documentation that includes repository structure, deployment procedures, rollback instructions, and architecture diagrams.
 
 
+## Maintenance:
+
+## Where to Pin and Upgrade Kubernetes Version
+
+You should manage your cluster’s Kubernetes version in the tool that actually creates or upgrades the cluster, not in Helm:
+
+
+Provisioner	Where to Pin Version	Citation
+
+kubeadm	ClusterConfiguration.kubernetesVersion: "vX.Y.Z" in your kubeadm config file 
+
+Kubernetes
+
+kind	nodes[].image: kindest/node:vX.Y.Z in your Kind config YAML 
+
+kind.sigs.k8s.io
+
+Managed Services (EKS/GKE/AKS)	Version flag/console when creating/upgrading cluster (e.g. eksctl create cluster --version 1.27) 
+
+AWS Documentation
+
+Infrastructure-as-Code (Terraform, Pulumi)	In your cluster resource definition, specify the kubernetes_version attribute	
+
+Best Practices for Cluster Upgrades
+Back up etcd and validate workloads
+
+Snapshot etcd before any upgrade. Test your workloads (including Helm-deployed controllers) against the new version in a staging cluster first 
+Reddit
+.
+
+Use the cluster tool’s upgrade workflow
+
+With kubeadm, run kubeadm upgrade plan && kubeadm upgrade apply to sequentially upgrade control-plane and worker nodes 
+Kubernetes
+.
+
+For managed services, follow the provider’s documented upgrade path (e.g., AWS EKS best practices guide) 
+
+.
+
+Helm chart compatibility checks
+
+Update each chart’s kubeVersion to reflect the tested compatibility range; use it to validate, not to drive, the upgrade 
+
+.
+
+CI/CD gating
+
+In your pipeline, deploy to a temporary cluster (Kind or staging), run integration tests, then promote the same cluster version in production 
+
+.
+
+Gradual rollout
+
+Upgrade one control-plane node at a time (for HA clusters), drain and upgrade worker nodes using rolling updates; verify functionality at each step 
+
+.
+
+When Helm Charts Matter
+
+Application upgrades: Use helm upgrade to update your microservices, CRDs, and add-ons once the cluster itself is already at the desired version 
+
+.
+
+Compatibility gating: The kubeVersion field in Chart.yaml prevents accidental installs on unsupported clusters 
+
+.
+
+Values management: Helm excels at managing configuration drift for your workloads, not cluster binaries.
+
+Conclusion
+
+Do pin and upgrade Kubernetes at the provisioning layer (kubeadm, kind, managed-service CLI, Terraform).
+
+Do use Helm’s kubeVersion only to ensure your charts run on the target cluster version.
+
+Don’t attempt to change the cluster’s control-plane or kubelet binaries via Helm charts.
+
+This clear separation of responsibilities yields reproducible, safe cluster upgrades and keeps Helm focused on what it does best—application lifecycle management.
+
+
+
+
+
+
+
+Sources:
+
+https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/?utm_source=chatgpt.com
+
+
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/?utm_source=chatgpt.com
+
+https://docs.aws.amazon.com/eks/latest/best-practices/cluster-upgrades.html?utm_source=chatgpt.com
+
+https://learn.microsoft.com/en-us/azure/aks/operator-best-practices-cluster-security?tabs=azure-cli
+
+https://kind.sigs.k8s.io/docs/user/configuration/?utm_source=chatgpt.com
+
+https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-config/?utm_source=chatgpt.com
+
+https://helm.sh/docs/topics/version_skew/?utm_source=chatgpt.com
+
+
+
 ### Expected output:
 
 
